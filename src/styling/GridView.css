@@ -1,0 +1,13 @@
+
+.gridView{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+.columnView{
+    width: 25%;
+    background-color: wheat;
+    padding: 5px;
+    flex: 0 0 20%;
+
+}
