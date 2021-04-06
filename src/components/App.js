@@ -1,5 +1,4 @@
 import React from 'react';
-
 import PageTabs from './PageTabs';
 import Page1 from './Page1';
 import Page2 from './Page2';
@@ -17,28 +16,30 @@ class App extends React.Component {
             done_items: []
         }
     }
+
     componentDidMount() {
         this.getData();
     }
 
-    getData(){
+    getData() {
         axios.get('http://my-json-server.typicode.com/bnissen24/project2DB/posts')
             .then(response => {
                 this.setState({all_items: response.data, sorted_items: this.sortItems(response.data)});
-            }).catch (error => {
+            }).catch(error => {
             this.setState({errorMessage: error.message});
         });
     }
-    sortItems(item){
+
+    sortItems(item) {
         return {
             todo_items: item.filter(post => post.column === 'todo'),
             inProgress_items: item.filter(post => post.column === 'in-progress'),
             review_items: item.filter(post => post.column === 'review'),
-            done_items: item.filter(post => post.column ==='done')
+            done_items: item.filter(post => post.column === 'done')
         }
     }
 
-    updateItem(indiv_item){
+    updateItem(indiv_item) {
         let all_items = this.state.all_items;
         const current_position = all_items.findIndex(item => item.id === indiv_item.id);
         all_items[current_position] = indiv_item;
@@ -48,11 +49,11 @@ class App extends React.Component {
     }
 
     onViewChange(view) {
-        this.setState({ view });
+        this.setState({view});
     }
 
     wrapPage(jsx) {
-        const { view } = this.state;
+        const {view} = this.state;
         return (
             <div className="container">
                 <PageTabs currentView={view}
@@ -63,19 +64,19 @@ class App extends React.Component {
     }
 
     render() {
-        const { view } = this.state;
+        const {view} = this.state;
 
         switch (view) {
             case 'page1':
                 return (this.wrapPage(
-                    <Page1 items ={this.state.sorted_items} updateItem={item => this.updateItem(item)}/>));
+                    <Page1 items={this.state.sorted_items} updateItem={item => this.updateItem(item)}/>));
             case 'page2':
                 return (this.wrapPage(
-                    <Page2 items = {this.state.all_items}/>
+                    <Page2 items={this.state.all_items}/>
                 ));
             case 'page3':
                 return (this.wrapPage(
-                    <Page3 />
+                    <Page3/>
                 ));
             default:
                 return (this.wrapPage(

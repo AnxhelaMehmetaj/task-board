@@ -1,6 +1,6 @@
 import React from 'react';
 
-import '../styling/GridView.css';
+import '../styling/page1.css';
 
 const columns = ["todo", "in-progress","review", "done"];
 
@@ -29,7 +29,7 @@ const clickButton= (id, column_name, task_function) =>{
     return (
         <div className="item">
             <div className="container">
-                <h4 className="title">
+                <h4 className="props-title">
                     {props.title}
                 </h4>
                 <div className="sometext">
